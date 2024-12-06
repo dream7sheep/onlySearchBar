@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多平台搜索</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f3f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .search-container {
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #00a1d6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button.zhihu {
+            background-color: #0084ff;
+        }
+
+        button.xiaohongshu {
+            background-color: #ff2c55;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-container">
+        <h1>多平台搜索</h1>
+        <div class="search-box">
+            <!-- 哔哩哔哩搜索框 -->
+            <div class="search-item">
+                <input id="bilibiliInput" type="text" placeholder="搜索哔哩哔哩"
+                    onkeypress="handleKeyPress(event, 'bilibili')">
+                <button onclick="searchBilibili()">搜索</button>
+            </div>
+            <!-- 知乎搜索框 -->
+            <div class="search-item">
+                <input id="zhihuInput" type="text" placeholder="搜索知乎" onkeypress="handleKeyPress(event, 'zhihu')">
+                <button class="zhihu" onclick="searchZhihu()">搜索</button>
+            </div>
+            <!-- 小红书搜索框 -->
+            <div class="search-item">
+                <input id="xiaohongshuInput" type="text" placeholder="搜索小红书"
+                    onkeypress="handleKeyPress(event, 'xiaohongshu')">
+                <button class="xiaohongshu" onclick="searchXiaohongshu()">搜索</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 哔哩哔哩搜索
+        function searchBilibili() {
+            const query = document.getElementById('bilibiliInput').value;
+            if (query) {
+                window.open(`https://search.bilibili.com/all?keyword=${encodeURIComponent(query)}`, '_blank');
+            }
+        }
+
+        // 知乎搜索
+        function searchZhihu() {
+            const query = document.getElementById('zhihuInput').value;
+            if (query) {
+                window.open(`https://www.zhihu.com/search?type=content&q=${encodeURIComponent(query)}`, '_blank');
+            }
+        }
+
+        // 小红书搜索
+        function searchXiaohongshu() {
+            const query = document.getElementById('xiaohongshuInput').value;
+            if (query) {
+                window.open(`https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(query)}`, '_blank');
+            }
+        }
+
+        // 回车键事件处理
+        function handleKeyPress(event, platform) {
+            if (event.key === 'Enter') {
+                if (platform === 'bilibili') {
+                    searchBilibili();
+                } else if (platform === 'zhihu') {
+                    searchZhihu();
+                } else if (platform === 'xiaohongshu') {
+                    searchXiaohongshu();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
